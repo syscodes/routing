@@ -21,7 +21,7 @@
 		"syscodes/controller": "^0.7.2",
 		"syscodes/core": "^0.7.2",
 		"syscodes/http": "^0.7.2",
-		"syscodes/support": "^0.7.2",
+		"syscodes/support": "^0.7.2"
 	},
 	"autoload": {
 		"psr-4": {
