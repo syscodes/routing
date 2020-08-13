@@ -1,6 +1,6 @@
 {
 	"name": "syscodes/routing",
-	"description": "The Syscodes Database package.",
+	"description": "The Syscodes Routing package.",
 	"keywords": ["lenevor","routing"],
 	"license": "BSD-3-Clause",
 	"homepage": "https://lenevor.com",
