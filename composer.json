@@ -16,12 +16,12 @@
 	],
 	"require": {
 		"php": "^7.3",
-		"syscodes/container": "^7.0",
-		"syscodes/contracts": "^7.0",
-		"syscodes/controller": "^7.0",
-		"syscodes/core": "^7.0",
-		"syscodes/http": "^7.0",
-		"syscodes/support": "^7.0",
+		"syscodes/container": "^0.7.2",
+		"syscodes/contracts": "^0.7.2",
+		"syscodes/controller": "^0.7.2",
+		"syscodes/core": "^0.7.2",
+		"syscodes/http": "^0.7.2",
+		"syscodes/support": "^0.7.2",
 	},
 	"autoload": {
 		"psr-4": {
