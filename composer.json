@@ -15,13 +15,13 @@
 		}
 	],
 	"require": {
-		"php": "^7.4|^8.0",
-		"syscodes/container": "^0.8.0",
-		"syscodes/contracts": "^0.8.0",
-		"syscodes/controller": "^0.8.0",
-		"syscodes/core": "^0.8.0",
-		"syscodes/http": "^0.8.0",
-		"syscodes/support": "^0.8.0"
+		"php": "^8.0.2",
+		"syscodes/container": "^0.8.1",
+		"syscodes/contracts": "^0.8.1",
+		"syscodes/controller": "^0.8.1",
+		"syscodes/core": "^0.8.1",
+		"syscodes/http": "^0.8.1",
+		"syscodes/support": "^0.8.1"
 	},
 	"autoload": {
 		"psr-4": {
