@@ -24,8 +24,9 @@ namespace Syscodes\Components\Routing;
 
 use ArrayObject;
 use JsonSerializable;
+use stdClass;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Syscodes\Components\Container\Container;
+use Syscodes\Components\Contracts\Container\Container;
 use Syscodes\Components\Contracts\Support\Arrayable;
 use Syscodes\Components\Contracts\Support\Jsonable;
 use Syscodes\Components\Http\JsonResponse;
@@ -45,7 +46,7 @@ class RouteResolver
 	/**
 	 * The container instance used by the router.
 	 * 
-	 * @var \Syscodes\Components\Container\Container 
+	 * @var \Syscodes\Components\Contracts\Container\Container 
 	 */
 	protected $container;
 
@@ -75,14 +76,14 @@ class RouteResolver
 	 * 
 	 * @param  \Syscodes\Components\Routing\Router  $router
 	 * @param  \Syscodes\Components\Routing\Collections\RouteCollection $routes
-	 * @param  \Syscodes\Components\Container\Container|null  $container
+	 * @param  \Syscodes\Components\Contracts\Container\Container|null  $container
 	 * 
 	 * @return void
 	 */
 	public function __construct(Router $router, RouteCollection $routes, ?Container $container = null)
 	{
-		$this->router = $router;
-		$this->routes = $routes;
+		$this->router    = $router;
+		$this->routes    = $routes;
 		$this->container = $container ?: new Container;
 	}
 
@@ -121,8 +122,6 @@ class RouteResolver
 	{
 		// Get all register routes with the same request method
 		$this->current = $route = $this->routes->match($request);
-
-		$route->setContainer($this->container);
 
 		$this->container->instance(Route::class, $route);
 
@@ -194,12 +193,12 @@ class RouteResolver
 		if ($response instanceof Stringable) {
             $response = new Response($response->__toString(), 200, ['Content-Type' => 'text/html']);
         } elseif ( ! $response instanceof SymfonyResponse &&
-			($response instanceof Arrayable ||
-			$response instanceof Jsonable ||
-			$response instanceof ArrayObject ||
-			$response instanceof JsonSerializable ||
-			$response instanceof \stdClass ||
-			is_array($response))) {
+                   ($response instanceof Arrayable ||
+                    $response instanceof Jsonable ||
+                    $response instanceof ArrayObject ||
+                    $response instanceof JsonSerializable ||
+                    $response instanceof stdClass ||
+                    is_array($response))) {
             $response = new JsonResponse($response);
         } elseif ( ! $response instanceof SymfonyResponse) {
             $response = new Response($response, 200, ['Content-Type' => 'text/html']);

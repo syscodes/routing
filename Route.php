@@ -73,7 +73,7 @@ class Route
 	/**
 	 * The compiled version of the route.
 	 * 
-	 * @var \Symfony\Component\Routing\CompiledRoute|string
+	 * @var \Syscodes\Bundles\ApplicationBundle\Routing\CompiledRoute|string
 	 */
 	public $compiled;
 
@@ -299,7 +299,7 @@ class Route
 		$callable = $this->action['uses'];
 
 		return $callable(...array_values($this->resolveMethodDependencies(
-			$this->parametersWithoutNulls(), new ReflectionFunction($callable)
+			$this->parametersWithouNulls(), new ReflectionFunction($callable)
 		)));
 	}
 
@@ -358,7 +358,7 @@ class Route
 	/**
 	 * Parse the route action.
 	 *
-	 * @param  callable|array|null  $action
+	 * @param  \callable|array|null  $action
 	 *
 	 * @return array
 	 *
@@ -570,43 +570,16 @@ class Route
 	 *
 	 * @return static
 	 */
-	public function where($name, $expression = null): static
+	public function where($name, ?string $expression = null): static
 	{
-		 foreach ($this->parseWhere($name, $expression) as $name => $expression) {
-            $this->wheres[$name] = $expression;
-        }
+		$wheres = is_array($name) ? $name : [$name => $expression];
+		
+		foreach ($wheres as $name => $expression) {
+			$this->wheres[$name] = $expression;
+		}
 
 		return $this;
 	}
-
-	/**
-     * Parse arguments to the where method into an array.
-     *
-     * @param  array|string  $name
-     * @param  string  $expression
-	 * 
-     * @return array
-     */
-    protected function parseWhere($name, $expression): array
-    {
-        return is_array($name) ? $name : [$name => $expression];
-    }
-
-	/**
-     * Set a list of regular expression requirements on the route.
-     *
-     * @param  array  $wheres
-	 * 
-     * @return static
-     */
-    public function setWheres(array $wheres): static
-    {
-        foreach ($wheres as $name => $expression) {
-            $this->where($name, $expression);
-        }
-
-        return $this;
-    }
 
 	/**
 	 * Set the where when have a variable assign.
@@ -887,7 +860,7 @@ class Route
 	/**
 	 * Get the compiled version of the route.
 	 * 
-	 * @return \Symfony\Component\Routing\CompiledRoute
+	 * @return \Syscodes\Bundles\ApplicationBundle\Routing\CompiledRoute
 	 */
 	public function getCompiled()
 	{

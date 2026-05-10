@@ -34,7 +34,7 @@ class ResourceRegister
     /**
      * The parameters set for this resource instance.
      * 
-     * @var array|string
+     * @param array|string
      */
     protected static $parameters;
 
@@ -57,7 +57,7 @@ class ResourceRegister
     /**
      * The verbs used in the resource URIs.
      * 
-     * @var array
+     * @param array
      */
     protected static $verbs = [
         'create' => 'create',
@@ -159,7 +159,7 @@ class ResourceRegister
     /**
      * Get the applicable resource methods.
      * 
-     * @param  array  $defaults
+     * @param  array  $default
      * @param  array  $options
      * 
      * @return array
@@ -397,10 +397,10 @@ class ResourceRegister
      * 
      * @return string
      */
-    public function getResourceWilcard($values): string
+    public function getResourceWilcard($value): string
     {
-        if (isset(static::$parameters[$values])) {
-            $value = static::$parameters[$values];
+        if (isset(static::$parameters[$value])) {
+            $value = static::$parameters[$value];
         }
 
         return str_replace('-', '_', $value);

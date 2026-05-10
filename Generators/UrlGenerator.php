@@ -38,13 +38,6 @@ use Syscodes\Components\Support\Str;
 class UrlGenerator implements UrlGeneratorContract
 {
     /**
-     * The asset root URL.
-     *
-     * @var string
-     */
-    protected $assetRoot;
-
-    /**
      * A cached copy of the URL root for the current request.
      * 
      * @var string|null
@@ -96,7 +89,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * The route URL generator instance.
      * 
-     * @var \Syscodes\Components\Routing\Generators\RouteUrlGenerator|null
+     * @var \Syscodes\Components\Routing\RouteUrlGenerator|null
      */
     protected $routeGenerator;
 
@@ -119,14 +112,12 @@ class UrlGenerator implements UrlGeneratorContract
      * 
      * @param  \Syscodes\Components\Routing\Collections\RouteCollection  $route
      * @param  \Syscodes\Components\Http\Request  $request
-     * @param  string|null  $assetRoot
      * 
      * @return void
      */
-    public function __construct(RouteCollection $route, Request $request, $assetRoot = null)
+    public function __construct(RouteCollection $route, Request $request)
     {
         $this->routes = $route;
-        $this->assetRoot = $assetRoot;
 
         $this->setRequest($request);
     }
@@ -242,9 +233,9 @@ class UrlGenerator implements UrlGeneratorContract
         // Once we get the root URL, we will check to see if it contains an index.php
         // file in the paths. If it does, we will remove it since it is not needed
         // for asset paths, but only for routes to endpoints in the application.
-        $root = $this->assetRoot ?: $this->getRootUrl($this->getScheme($secure));
+        $root = $this->getRootUrl($this->getScheme($secure));
 
-        return Str::finish($this->removeIndex($root), '/').trim($path, '/');
+        return $this->removeIndex($root).'/'.trim($path, '/');
     }
     
     /**
@@ -393,7 +384,7 @@ class UrlGenerator implements UrlGeneratorContract
     {
         $expires = $request->query('expires');
 
-        return ! ($expires && Chronos::now()->getTimestamp() > $expires);
+        return ! ($expires && Chronos::parse()->getTimestamp() > $expires);
     }
 
     /**
@@ -501,18 +492,6 @@ class UrlGenerator implements UrlGeneratorContract
     {
         $this->forcedRoot = $root;
     }
-
-    /**
-     * Set the URL origin for all generated asset URLs.
-     *
-     * @param  string|null  $root
-     * 
-     * @return void
-     */
-    public function useAssetOrigin(?string $root): void
-    {
-        $this->assetRoot = $root ? rtrim($root, '/') : null;
-    }
     
     /**
      * Get the base URL for the request.
@@ -556,7 +535,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Get the Route URL generator instance.
      * 
-     * @return \Syscodes\Components\Routing\Generators\RouteUrlGenerator
+     * @return \Syscodes\Components\Routing\RouteUrlGenerator
      */
     protected function routeUrl()
     {
@@ -658,7 +637,7 @@ class UrlGenerator implements UrlGeneratorContract
     /**
      * Set the route collection.
      * 
-     * @param  \Syscodes\Components\Routing\Collections\RouteCollection  $routes
+     * @param  \Syscodes\Components\Routing\RouteCollection  $routes
      * 
      * @return static
      */

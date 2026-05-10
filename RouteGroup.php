@@ -83,7 +83,7 @@ class RouteGroup
 	 * 
 	 * @param  array  $new
 	 * @param  array  $old
-	 * @param  bool  $existsPrefix
+	 * @param  bool  $existPrefix
 	 * 
 	 * @return string|null
 	 */
