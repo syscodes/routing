@@ -27,7 +27,7 @@ use RuntimeException;
 /**
  * BackedEnumCaseNotFoundException.
  */
-class BackedEnumCaseNotFoundException extends RuntimeException
+class BackedEnumCaseNotFoundException extends RuntimeException 
 {
     /**
      * Constructor. Create a new exception instance.
