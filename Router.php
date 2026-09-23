@@ -39,7 +39,7 @@ use Syscodes\Components\Contracts\Events\Dispatcher;
 /**
  * The Router class allows the integration of an easy-to-use routing system.
  */
-class Router implements BindingRoutable, Routable
+class Router implements BindingRoutable, Routable 
 {
 	use Concerns\Mapper,
 	    Concerns\Resolver,
