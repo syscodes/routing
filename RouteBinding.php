@@ -27,7 +27,7 @@ use Syscodes\Components\Support\Str;
 /**
  * Allows create a route model binding.
  */
-class RouteBinding
+class RouteBinding 
 {
     /**
      * Create a Route model binding for a given callback.
