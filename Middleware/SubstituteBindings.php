@@ -29,7 +29,7 @@ use Syscodes\Components\Database\Erostrine\Exceptions\ModelNotFoundException;
 /**
  * Allows the substitute bindings.
  */
-class SubstituteBindings
+class SubstituteBindings 
 {
     /**
      * The router instance.
